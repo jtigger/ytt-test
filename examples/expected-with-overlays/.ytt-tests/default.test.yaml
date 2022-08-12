@@ -1,0 +1,12 @@
+---
+actual:
+  subject:
+    file:
+      - config/
+  fixtures:
+    data-values-file:
+      - default-values.yaml
+
+expected:
+  file:
+    - default/

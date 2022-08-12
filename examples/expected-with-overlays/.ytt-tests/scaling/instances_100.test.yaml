@@ -1,0 +1,13 @@
+---
+actual:
+  subject:
+    file:
+      - config/
+  fixtures:
+    data-values-file:
+      - instances_100.values.yaml
+
+expected:
+  file:
+    - ../default
+    - replicas_is_100.yaml
