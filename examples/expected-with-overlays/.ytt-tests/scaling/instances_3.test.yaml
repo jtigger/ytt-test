@@ -1,13 +1,3 @@
 ---
-actual:
-  subject:
-    file:
-      - config/
-  fixtures:
-    data-values-file:
-      - instances_3.values.yaml
-
-expected:
-  file:
-    - ../default
-    - replicas_is_3.yaml
+actual: ytt -f ${YTT_SUBJECT}/config/ --data-values-file instances_3.values.yaml
+expected: ytt -f ../default -f replicas_is_3.yaml

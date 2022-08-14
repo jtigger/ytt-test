@@ -1,12 +1,3 @@
 ---
-actual:
-  subject:
-    file:
-      - config/
-  fixtures:
-    data-values-file:
-      - default-values.yaml
-
-expected:
-  file:
-    - default/
+actual: ytt -f ${YTT_SUBJECT}/config/ --data-values-file default-values.yaml
+expected: ytt -f default/

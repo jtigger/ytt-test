@@ -9,31 +9,14 @@
 2. for each test you want to run, create a test file (i.e. with a `.test.yaml` suffix)
 
     ```yaml
-    #! sample.test.yaml
+    #! .ytt-tests/sample.test.yaml
     ---
 
-    #! First, run `ytt` with these files...
-    actual:
-      #! ytt library files to test
-      #!   (paths in this section are relative to the parent directory of `.ytt-tests`)
-      subject:
-        #! corresponds to the ytt `--file` flag
-        file:
-          - config/
-      
-      #! Additional files from this testcase -- to configure this run
-      #!   (paths in this section are relative to _this_ test file)
-      fixtures:
-        #! corresponds to the ytt `--data-values-file` flag
-        data-values-file:
-          - values.yaml
-
-    #! Then, run `ytt` with these files...
-    #!   (paths in this section are relative to _this_ test file)
-    expected:
-      file:
-        - expected/
+    actual: ytt --file ${YTT_SUBJECT}/config/ --data-values-file values.yaml
+    expected: ytt --file expected/
     ```
+    - ytt-test sets `YTT_SUBJECT` to the absolute path to parent directory of `.ytt-tests`
+
 3. create the fixture(s) for the test
 
     ```yaml
@@ -45,13 +28,17 @@
 4. in the parent directory of `.ytt-tests` run the test runner
 
     ```console
+    $ ls -a1F
+    .ytt-tests/
+    config/
+
     $ ytt-test.sh
     fail  .ytt-tests/sample.test.yaml
             ==> .ytt-test-out/sample/result.diff
 
     FAILURE
     ```
-5. examine the "actual" result and if acceptable, make it the "expected"
+5. examine the "actual" result; if acceptable, make it the "expected"
 
     ```console
     $ mv .ytt-test-out/sample/actual .ytt-tests/expected
