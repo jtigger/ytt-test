@@ -1,0 +1,27 @@
+#@ load("@ytt:assert", "assert")
+#@ expects=["expected", "expected_out", "expected_err"]
+
+#@data/values-schema
+#@schema/validation ("one of " + ", ".join(expects), assert.one_not_null(expects))
+---
+#@schema/desc "ytt invocation to test"
+actual: ""
+
+#@schema/desc "ytt invocation describing the expected results"
+#@schema/nullable
+expected: ""
+
+#@schema/desc "Expect the given output to standard output."
+#@schema/nullable
+expected_out: ""
+
+#@schema/desc "Expect the given output to standard error."
+#@schema/nullable
+expected_err: ""
+
+#@schema/desc "Values derived by ytt test itself."
+_ytt_test_:
+  #@schema/desc "Path to the test spec (this file)."
+  test_file: ""
+  #@schema/desc "Absolute path to the current test base directory"
+  out_dir: ""

@@ -1,3 +1,3 @@
 ---
-actual: ytt -f ${YTT_SUBJECT}/config/ --data-values-file values.yaml
+actual: ytt -f ${YTT_SUBJECT}/config --data-values-file values.yaml
 expected: ytt -f deployment.yaml

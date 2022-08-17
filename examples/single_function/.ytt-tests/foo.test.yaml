@@ -1,0 +1,13 @@
+---
+actual: |
+  ytt -f ${YTT_SUBJECT}/config/helpers.lib.yaml -f foo.test.yaml=<(cat << EOF
+  #@ load("helpers.lib.yaml", "foo")
+  first: #@ foo("thing", 1)
+  second: #@ foo("thing", 2)
+  EOF
+  )
+expected_out: |
+  first:
+    foo: thing-1
+  second:
+    foo: thing-2
